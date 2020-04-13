@@ -35,6 +35,7 @@ public class Example extends JPanel implements ActionListener {
 	int cellSize;
 	
 	// WE ARE IN BUSINESS //
+	//Checking, again//
 
 	/**
 	 * Setup the basic info for the example
