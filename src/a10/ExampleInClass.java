@@ -40,8 +40,8 @@ public class ExampleInClass extends JPanel implements ActionListener {
 
 		// Load images
 		try {
-			plantImage = ImageIO.read(new File("src/a10/Animal-Icons/frog-icon.png"));
-			zombieImage = ImageIO.read(new File("src/a10/Animal-Icons/chihuahua-icon.png"));
+			plantImage = ImageIO.read(new File("src/a10/Icons/will.png"));
+			zombieImage = ImageIO.read(new File("src/a10/Icons/eleven.png"));
 		} catch (IOException e) {
 			System.out.println("A file was not found");
 			System.exit(0);
