@@ -33,6 +33,7 @@ public class Example extends JPanel implements ActionListener {
 	int numRows;
 	int numCols;
 	int cellSize;
+	Random rand;
 	
 	// WE ARE IN BUSINESS //
 	//Checking, again//
@@ -71,6 +72,7 @@ public class Example extends JPanel implements ActionListener {
 		// Add them to the list of actors
 		actors.add(plant);
 		actors.add(zombie);
+		rand = new Random();
 
 		// The timer updates the game each time it goes.
 		// Get the javax.swing Timer, not from util.
@@ -134,6 +136,22 @@ public class Example extends JPanel implements ActionListener {
 		for (Actor actor : actors) {
 			actor.move(); // for Zombie, only moves if not colliding.
 		}
+		
+		// Create zombies at random rows
+		
+		if (rand.nextInt(100) > 97) {
+			int row = rand.nextInt(6);
+			int y = row * 50;
+			
+			Zombie zombie = new Zombie(new Point2D.Double(500, y), new Point2D.Double(zombieImage.getWidth(), zombieImage.getHeight()), zombieImage, 100, 50, -2, 10);
+			actors.add(zombie);
+		}
+//		Random hi = new Random();
+//		if (hi.nextInt(100) > 97)
+//			System.out.println("Yep");
+//		Zombie zombie = new Zombie(new Point2D.Double(500, 200), new Point2D.Double(zombieImage.getWidth(), zombieImage.getHeight()), zombieImage, 100, 50, -2, 10);
+//		actors.add(zombie);
+		
 
 		// Redraw the new scene
 		repaint();
