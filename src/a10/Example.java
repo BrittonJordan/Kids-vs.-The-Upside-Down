@@ -33,6 +33,8 @@ public class Example extends JPanel implements ActionListener {
 	int numRows;
 	int numCols;
 	int cellSize;
+	
+	// WE ARE IN BUSINESS //
 
 	/**
 	 * Setup the basic info for the example
