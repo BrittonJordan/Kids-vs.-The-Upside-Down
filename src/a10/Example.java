@@ -34,6 +34,9 @@ public class Example extends JPanel implements ActionListener {
 	int numCols;
 	int cellSize;
 	Random rand;
+	int xpPoints;
+	JLabel xpLabel;
+	int counter;
 	
 	// WE ARE IN BUSINESS //
 	//Checking, again//
@@ -45,7 +48,7 @@ public class Example extends JPanel implements ActionListener {
 		super();
 
 		// Define some quantities of the scene
-		numRows = 5;
+		numRows = 6;
 		numCols = 7;
 		cellSize = 75;
 		setPreferredSize(new Dimension(50 + numCols * cellSize, 50 + numRows * cellSize));
@@ -56,7 +59,7 @@ public class Example extends JPanel implements ActionListener {
 		// Load images
 		try {
 			plantImage = ImageIO.read(new File("src/a10/Icons/will.png"));
-			zombieImage = ImageIO.read(new File("src/a10/Icons/eleven.png"));
+			zombieImage = ImageIO.read(new File("src/a10/Icons/demogorgon.png"));
 		} catch (IOException e) {
 			System.out.println("A file was not found");
 			System.exit(0);
@@ -78,6 +81,11 @@ public class Example extends JPanel implements ActionListener {
 		// Get the javax.swing Timer, not from util.
 		timer = new Timer(30, this);
 		timer.start();
+		
+		xpLabel = new JLabel("XP : 0");
+		this.add(xpLabel);
+		xpPoints = 0;
+		counter = 0;
 
 	}
 
@@ -140,18 +148,19 @@ public class Example extends JPanel implements ActionListener {
 		// Create zombies at random rows
 		
 		if (rand.nextInt(100) > 97) {
-			int row = rand.nextInt(6);
+			int row = rand.nextInt(5) + 1;
 			int y = row * 50;
 			
 			Zombie zombie = new Zombie(new Point2D.Double(500, y), new Point2D.Double(zombieImage.getWidth(), zombieImage.getHeight()), zombieImage, 100, 50, -2, 10);
 			actors.add(zombie);
 		}
-//		Random hi = new Random();
-//		if (hi.nextInt(100) > 97)
-//			System.out.println("Yep");
-//		Zombie zombie = new Zombie(new Point2D.Double(500, 200), new Point2D.Double(zombieImage.getWidth(), zombieImage.getHeight()), zombieImage, 100, 50, -2, 10);
-//		actors.add(zombie);
-		
+//		
+		counter++;
+		if (counter > 20) {
+		xpPoints+=1;
+		xpLabel.setText("xp : " + xpPoints);
+		counter = 0;
+		}
 
 		// Redraw the new scene
 		repaint();
@@ -171,6 +180,19 @@ public class Example extends JPanel implements ActionListener {
 				Example panel = new Example();
 
 				app.setContentPane(panel);
+				
+				
+				
+				JButton eleven = new JButton("Eleven");
+				JButton will = new JButton("Will");
+				JButton mike = new JButton("Mike");
+				JButton dustin = new JButton("Dustin");
+				JButton lucas = new JButton("Lucas");
+				app.add(eleven);
+				app.add(will);
+				app.add(mike);
+				app.add(lucas);
+				app.add(dustin);
 				app.pack();
 				app.setVisible(true);
 			}
