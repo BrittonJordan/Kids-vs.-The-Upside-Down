@@ -36,6 +36,10 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 	JLabel pointsLabel;
 	int counter;
 	static JButton eleven;
+	static JButton mike;
+	static JButton will;
+	static JButton lucas;
+	static JButton dustin;
 	private String nextPlant;
 
 	/**
@@ -47,8 +51,8 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 		// Define some quantities of the scene
 		numRows = 6;
 		numCols = 7;
-		cellSize = 75;
-		setPreferredSize(new Dimension(50 + numCols * cellSize, 50 + numRows * cellSize));
+		cellSize = 45;
+		setPreferredSize(new Dimension(200 + numCols * cellSize, 50 + numRows * cellSize));
 
 		// Store all the plants and zombies in here.
 		actors = new ArrayList<>();
@@ -68,13 +72,26 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 		timer = new Timer(30, this);
 		timer.start();
 
-		pointsLabel = new JLabel("XP : 0");
+		pointsLabel = new JLabel("Platinum : 0");
 		this.add(pointsLabel);
 		platinumPoints = 0;
 		counter = 0;
 
-		eleven = new JButton("Eleven");
+		eleven = new JButton("Eleven: 50");
 		eleven.addActionListener(this);
+
+		mike = new JButton("Mike: 25");
+		mike.addActionListener(this);
+
+		will = new JButton("Will: 15");
+		will.addActionListener(this);
+
+		lucas = new JButton("Lucas: 10");
+		lucas.addActionListener(this);
+
+		dustin = new JButton("Dustin: 5");
+		dustin.addActionListener(this);
+
 		addMouseListener(this);
 
 	}
@@ -106,10 +123,10 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 			actor.update();
 		}
 
-		// Try to attack 
+		// Try to attack
 		for (Actor actor : actors) {
 			for (Actor other : actors) {
-					actor.attack(other);
+				actor.attack(other);
 			}
 		}
 
@@ -134,40 +151,39 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 		for (Actor actor : actors) {
 			actor.move(); // for Zombie, only moves if not colliding.
 		}
-		
+
 		// Create zombies at random rows
-		
+
 		if (rand.nextInt(100) > 97) {
 			int row = rand.nextInt(5) + 1;
-			int y = row * 50;
-			
+			int y = row * 45;
+
 			Zombie zombie = new Demogorgon(new Point2D.Double(500, y));
 			actors.add(zombie);
 		}
 //		
 		counter++;
 		if (counter > 20) {
-		platinumPoints+=1;
-		pointsLabel.setText("Platinum : " + platinumPoints);
-		counter = 0;
+			platinumPoints += 10;
+			pointsLabel.setText("Platinum : " + platinumPoints);
+			counter = 0;
 		}
 
-		if (e.getSource()==eleven && platinumPoints>=5) {  // one for each kid
+		if (e.getSource() == eleven && platinumPoints >= 50) { // one for each kid
 			nextPlant = "eleven";
-			
 		}
-//		if (e.getSource() == mike){
-//			
-//		}
-//		else {
-//			if (e.getSource() == MouseEvent) {
-//			if(nextPlant != null && click was in play area) {
-//				if (nextPlant.equals("eleven")) {
-//					
-//				}
-//			}
-//			nextPlant = null;
-//		}
+		if (e.getSource() == mike && platinumPoints >= 25) { // one for each kid
+			nextPlant = "mike";
+		}
+		if (e.getSource() == will && platinumPoints >= 15) { // one for each kid
+			nextPlant = "will";
+		}
+		if (e.getSource() == lucas && platinumPoints >= 10) { // one for each kid
+			nextPlant = "lucas";
+		}
+		if (e.getSource() == dustin && platinumPoints >= 5) { // one for each kid
+			nextPlant = "dustin";
+		}
 		// Redraw the new scene
 		repaint();
 	}
@@ -186,14 +202,9 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 				Example panel = new Example();
 
 				app.setContentPane(panel);
-
-				JButton will = new JButton("Will");
-				JButton mike = new JButton("Mike");
-				JButton dustin = new JButton("Dustin");
-				JButton lucas = new JButton("Lucas");
 				app.add(eleven);
-				app.add(will);
 				app.add(mike);
+				app.add(will);
 				app.add(lucas);
 				app.add(dustin);
 				app.pack();
@@ -204,21 +215,44 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		
-			int x = e.getX();
-			int y = e.getY();
-			int row = (( y / 75 )) * 75;
-			int col = (( x / 75 )) * 75;
-			Point2D.Double position = new Point2D.Double(col, row);
-			if (nextPlant.equals("eleven")) {
-				Plant elevenPlant = new Eleven(position);
-				actors.add(elevenPlant);
-				platinumPoints-=5;
-				pointsLabel.setText("Platinum : " + platinumPoints);
-			}
-			nextPlant = "";
+
+		int x = e.getX();
+		int y = e.getY();
+		int row = (y / 45) * 45;
+		int col = (x / 45) * 45;
+		Point2D.Double position = new Point2D.Double(col, row);
+		if (nextPlant.equals("eleven")) {
+			Plant elevenPlant = new Eleven(position);
+			actors.add(elevenPlant);
+			platinumPoints -= 50;
+			pointsLabel.setText("Platinum : " + platinumPoints);
 		}
-		
+		if (nextPlant.equals("mike")) {
+			Plant mikePlant = new Mike(position);
+			actors.add(mikePlant);
+			platinumPoints -= 25;
+			pointsLabel.setText("Platinum : " + platinumPoints);
+		}
+		if (nextPlant.equals("will")) {
+			Plant willPlant = new Will(position);
+			actors.add(willPlant);
+			platinumPoints -= 15;
+			pointsLabel.setText("Platinum : " + platinumPoints);
+		}
+		if (nextPlant.equals("lucas")) {
+			Plant lucasPlant = new Lucas(position);
+			actors.add(lucasPlant);
+			platinumPoints -= 10;
+			pointsLabel.setText("Platinum : " + platinumPoints);
+		}
+		if (nextPlant.equals("dustin")) {
+			Plant dustinPlant = new Dustin(position);
+			actors.add(dustinPlant);
+			platinumPoints -= 5;
+			pointsLabel.setText("Platinum : " + platinumPoints);
+		}
+		nextPlant = "";
+	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
