@@ -69,8 +69,7 @@ public class Example extends JPanel implements ActionListener {
 		Plant plant = new Plant(new Point2D.Double(200, 200),
 				new Point2D.Double(plantImage.getWidth(), plantImage.getHeight()), plantImage, 100, 5, 1);
 		// Make a zombie
-		Zombie zombie = new Zombie(new Point2D.Double(500, 200),
-				new Point2D.Double(plantImage.getWidth(), plantImage.getHeight()), zombieImage, 100, 50, -2, 10);
+		Zombie zombie = new Demogorgon(new Point2D.Double(500, 200));
 
 		// Add them to the list of actors
 		actors.add(plant);
