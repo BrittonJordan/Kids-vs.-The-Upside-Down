@@ -12,10 +12,10 @@ import a10.Zombie;
 
 public class Demogorgon extends Zombie {
 	
-	private static final int HEALTH = 20;
+	private static final int HEALTH = 50;
 	private static final int COOLDOWN = 30;
 	private static final int SPEED = -1;
-	private static final int ATTACKDMG = 5;
+	private static final int ATTACKDMG = 10;
 	private static final BufferedImage IMAGE;
 	static {
 		BufferedImage localImage = null;

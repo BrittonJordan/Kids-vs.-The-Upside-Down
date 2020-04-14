@@ -10,8 +10,8 @@ import javax.imageio.ImageIO;
 
 public class Dustin extends Plant {
 
-	private static final int HEALTH = 10;
-	private static final int COOLDOWN = 10;
+	private static final int HEALTH = 30;
+	private static final int COOLDOWN = 60;
 	private static final int ATTACKDMG = 5;
 	private static final BufferedImage IMAGE;
 	static {

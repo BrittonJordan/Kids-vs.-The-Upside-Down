@@ -10,8 +10,8 @@ import javax.imageio.ImageIO;
 
 public class Eleven extends Plant{
 
-	private static final int HEALTH = 200;
-	private static final int COOLDOWN = 20;
+	private static final int HEALTH = 100;
+	private static final int COOLDOWN = 60;
 	private static final int ATTACKDMG = 100;
 	private static final BufferedImage IMAGE;
 	static {

@@ -10,9 +10,9 @@ import javax.imageio.ImageIO;
 
 public class Mike extends Plant{
 
-	private static final int HEALTH = 100;
-	private static final int COOLDOWN = 40;
-	private static final int ATTACKDMG = 20;
+	private static final int HEALTH = 50;
+	private static final int COOLDOWN = 10;
+	private static final int ATTACKDMG = 5;
 	private static final BufferedImage IMAGE;
 	static {
 		BufferedImage localImage = null;

@@ -56,15 +56,7 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 
 		// Store all the plants and zombies in here.
 		actors = new ArrayList<>();
-
-		// Make a plant
-		Plant plant = new Eleven(new Point2D.Double(200, 200));
-		// Make a zombie
-		Zombie zombie = new Demogorgon(new Point2D.Double(500, 200));
-
-		// Add them to the list of actors
-		actors.add(plant);
-		actors.add(zombie);
+		
 		rand = new Random();
 
 		// The timer updates the game each time it goes.
@@ -154,7 +146,7 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 
 		// Create zombies at random rows
 
-		if (rand.nextInt(100) > 97) {
+		if (rand.nextInt(100) > 98) {
 			int row = rand.nextInt(5) + 1;
 			int y = row * 45;
 
@@ -164,7 +156,7 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 //		
 		counter++;
 		if (counter > 20) {
-			platinumPoints += 10;
+			platinumPoints += 1;
 			pointsLabel.setText("Platinum : " + platinumPoints);
 			counter = 0;
 		}
