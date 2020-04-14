@@ -156,7 +156,7 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 //		
 		counter++;
 		if (counter > 20) {
-			platinumPoints += 1;
+			platinumPoints += 10;
 			pointsLabel.setText("Platinum : " + platinumPoints);
 			counter = 0;
 		}
