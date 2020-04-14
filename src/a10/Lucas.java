@@ -36,7 +36,7 @@ public class Lucas extends Plant {
 	@Override
 	public void attack(Actor other) {
 		if (other instanceof Zombie && this != other && this.isCollidingOther(other) && this.readyForAction()) {
-			other.changeHealth(ATTACKDMG);
+			other.changeHealth(-ATTACKDMG);
 			this.resetCoolDown();
 		}
 	}
