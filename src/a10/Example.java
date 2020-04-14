@@ -75,6 +75,7 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 
 		eleven = new JButton("Eleven");
 		eleven.addActionListener(this);
+		addMouseListener(this);
 
 	}
 
@@ -152,8 +153,6 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 		}
 
 		if (e.getSource()==eleven && platinumPoints>=5) {  // one for each kid
-			platinumPoints-=5;
-			pointsLabel.setText("Platinum : " + platinumPoints);
 			nextPlant = "eleven";
 			
 		}
@@ -205,21 +204,21 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if (nextPlant.equals("eleven")) {
+		
 			int x = e.getX();
 			int y = e.getY();
-			// row, column
-			Point2D.Double position = new Point2D.Double(x, y);
+			int row = (( y / 75 )) * 75;
+			int col = (( x / 75 )) * 75;
+			Point2D.Double position = new Point2D.Double(col, row);
 			if (nextPlant.equals("eleven")) {
-
 				Plant elevenPlant = new Eleven(position);
 				actors.add(elevenPlant);
-				repaint();
+				platinumPoints-=5;
+				pointsLabel.setText("Platinum : " + platinumPoints);
 			}
-
+			nextPlant = "";
 		}
-		nextPlant = "";
-	}
+		
 
 	@Override
 	public void mousePressed(MouseEvent e) {
