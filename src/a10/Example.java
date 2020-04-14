@@ -56,15 +56,6 @@ public class Example extends JPanel implements ActionListener {
 		// Store all the plants and zombies in here.
 		actors = new ArrayList<>();
 
-		// Load images
-		try {
-			plantImage = ImageIO.read(new File("src/a10/Icons/will.png"));
-			zombieImage = ImageIO.read(new File("src/a10/Icons/demogorgon.png"));
-		} catch (IOException e) {
-			System.out.println("A file was not found");
-			System.exit(0);
-		}
-
 		// Make a plant
 		Plant plant = new Eleven(new Point2D.Double(200, 200));
 		// Make a zombie
@@ -149,7 +140,7 @@ public class Example extends JPanel implements ActionListener {
 			int row = rand.nextInt(5) + 1;
 			int y = row * 50;
 			
-			Zombie zombie = new Zombie(new Point2D.Double(500, y), new Point2D.Double(zombieImage.getWidth(), zombieImage.getHeight()), zombieImage, 100, 50, -2, 10);
+			Zombie zombie = new Demogorgon(new Point2D.Double(500, y));
 			actors.add(zombie);
 		}
 //		
