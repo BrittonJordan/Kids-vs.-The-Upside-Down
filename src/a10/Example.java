@@ -28,18 +28,14 @@ public class Example extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private Timer timer;
 	private ArrayList<Actor> actors; // Plants and zombies all go in here
-	BufferedImage plantImage; // Maybe these images should be in those classes, but easy to change here.
-	BufferedImage zombieImage;
 	int numRows;
 	int numCols;
 	int cellSize;
 	Random rand;
-	int xpPoints;
-	JLabel xpLabel;
+	int platinumPoints;
+	JLabel pointsLabel;
 	int counter;
-	
-	// WE ARE IN BUSINESS //
-	//Checking, again//
+	static JButton eleven;
 
 	/**
 	 * Setup the basic info for the example
@@ -71,10 +67,13 @@ public class Example extends JPanel implements ActionListener {
 		timer = new Timer(30, this);
 		timer.start();
 		
-		xpLabel = new JLabel("XP : 0");
-		this.add(xpLabel);
-		xpPoints = 0;
+		pointsLabel = new JLabel("XP : 0");
+		this.add(pointsLabel);
+		platinumPoints = 0;
 		counter = 0;
+		
+		eleven = new JButton("Eleven");
+		eleven.addActionListener(this);
 
 	}
 
@@ -146,11 +145,15 @@ public class Example extends JPanel implements ActionListener {
 //		
 		counter++;
 		if (counter > 20) {
-		xpPoints+=1;
-		xpLabel.setText("xp : " + xpPoints);
+		platinumPoints+=1;
+		pointsLabel.setText("Platinum : " + platinumPoints);
 		counter = 0;
 		}
 
+		if (e.getSource()==eleven && platinumPoints>=5) {
+			platinumPoints-=5;
+			pointsLabel.setText("Platinum : " + platinumPoints);
+		}
 		// Redraw the new scene
 		repaint();
 	}
@@ -170,9 +173,6 @@ public class Example extends JPanel implements ActionListener {
 
 				app.setContentPane(panel);
 				
-				
-				
-				JButton eleven = new JButton("Eleven");
 				JButton will = new JButton("Will");
 				JButton mike = new JButton("Mike");
 				JButton dustin = new JButton("Dustin");
