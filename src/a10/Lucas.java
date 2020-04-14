@@ -1,11 +1,14 @@
 package a10;
 
+import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Double;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+
+import a10.Zombie;
 
 public class Lucas extends Plant {
 	
@@ -25,14 +28,16 @@ public class Lucas extends Plant {
 		IMAGE = localImage;
 	}
 
-	public Lucas(Double startingPosition, Double initHitbox, BufferedImage img, int health, int coolDown,
-			int attackDamage) {
-		super(startingPosition, initHitbox, img, health, coolDown, attackDamage);
+	public Lucas(Double startingPosition) {
+		super(startingPosition, new Point2D.Double(IMAGE.getWidth(), IMAGE.getHeight()), IMAGE, HEALTH, COOLDOWN, ATTACKDMG);
 	}
 
 	@Override
 	public void attack(Actor other) {
-		
+		if (other instanceof Zombie && this != other && this.isCollidingOther(other) && this.readyForAction()) {
+			other.changeHealth(ATTACKDMG);
+			this.resetCoolDown();
+		}
 	}
 
 }
