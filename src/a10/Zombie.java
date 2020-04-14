@@ -4,7 +4,7 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Double;
 import java.awt.image.BufferedImage;
 
-public class Zombie extends Actor {
+public abstract class Zombie extends Actor {
 	
 	private boolean isColliding;
 
@@ -12,7 +12,6 @@ public class Zombie extends Actor {
 			int attackDamage) {
 		super(startingPosition, initHitbox, img, health, coolDown, speed, attackDamage);
 		isColliding = false;
-		// TODO Auto-generated constructor stub
 	}
 	
 	/**
@@ -65,10 +64,6 @@ public class Zombie extends Actor {
 	 * @param other
 	 */
 	@Override
-	public void attack(Actor other) {
-		if (other instanceof Plant) {
-			super.attack(other);
-		}
-	}
+	public abstract void attack(Actor other);
 
 }
