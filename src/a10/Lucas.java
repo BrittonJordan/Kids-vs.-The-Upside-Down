@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 import a10.Zombie;
 
 public class Lucas extends Plant {
-	
+
 	private static final int HEALTH = 10;
 	private static final int COOLDOWN = 10;
 	private static final int ATTACKDMG = 5;
@@ -29,7 +29,8 @@ public class Lucas extends Plant {
 	}
 
 	public Lucas(Double startingPosition) {
-		super(startingPosition, new Point2D.Double(IMAGE.getWidth(), IMAGE.getHeight()), IMAGE, HEALTH, COOLDOWN, ATTACKDMG);
+		super(startingPosition, new Point2D.Double(IMAGE.getWidth(), IMAGE.getHeight()), IMAGE, HEALTH, COOLDOWN,
+				ATTACKDMG);
 	}
 
 	@Override

@@ -27,7 +27,8 @@ public class Dustin extends Plant {
 	}
 
 	public Dustin(Double startingPosition) {
-		super(startingPosition, new Point2D.Double(IMAGE.getWidth(), IMAGE.getHeight()), IMAGE, HEALTH, COOLDOWN, ATTACKDMG);
+		super(startingPosition, new Point2D.Double(IMAGE.getWidth(), IMAGE.getHeight()), IMAGE, HEALTH, COOLDOWN,
+				ATTACKDMG);
 	}
 
 	@Override

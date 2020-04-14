@@ -23,7 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class Example extends JPanel implements ActionListener {
+public class Example extends JPanel implements ActionListener, MouseListener {
 
 	private static final long serialVersionUID = 1L;
 	private Timer timer;
@@ -36,6 +36,7 @@ public class Example extends JPanel implements ActionListener {
 	JLabel pointsLabel;
 	int counter;
 	static JButton eleven;
+	private String nextPlant;
 
 	/**
 	 * Setup the basic info for the example
@@ -66,12 +67,12 @@ public class Example extends JPanel implements ActionListener {
 		// Get the javax.swing Timer, not from util.
 		timer = new Timer(30, this);
 		timer.start();
-		
+
 		pointsLabel = new JLabel("XP : 0");
 		this.add(pointsLabel);
 		platinumPoints = 0;
 		counter = 0;
-		
+
 		eleven = new JButton("Eleven");
 		eleven.addActionListener(this);
 
@@ -150,10 +151,24 @@ public class Example extends JPanel implements ActionListener {
 		counter = 0;
 		}
 
-		if (e.getSource()==eleven && platinumPoints>=5) {
+		if (e.getSource()==eleven && platinumPoints>=5) {  // one for each kid
 			platinumPoints-=5;
 			pointsLabel.setText("Platinum : " + platinumPoints);
+			nextPlant = "eleven";
+			
 		}
+//		if (e.getSource() == mike){
+//			
+//		}
+//		else {
+//			if (e.getSource() == MouseEvent) {
+//			if(nextPlant != null && click was in play area) {
+//				if (nextPlant.equals("eleven")) {
+//					
+//				}
+//			}
+//			nextPlant = null;
+//		}
 		// Redraw the new scene
 		repaint();
 	}
@@ -172,7 +187,7 @@ public class Example extends JPanel implements ActionListener {
 				Example panel = new Example();
 
 				app.setContentPane(panel);
-				
+
 				JButton will = new JButton("Will");
 				JButton mike = new JButton("Mike");
 				JButton dustin = new JButton("Dustin");
@@ -186,6 +201,48 @@ public class Example extends JPanel implements ActionListener {
 				app.setVisible(true);
 			}
 		});
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if (nextPlant.equals("eleven")) {
+			int x = e.getX();
+			int y = e.getY();
+			// row, column
+			Point2D.Double position = new Point2D.Double(x, y);
+			if (nextPlant.equals("eleven")) {
+
+				Plant elevenPlant = new Eleven(position);
+				actors.add(elevenPlant);
+				repaint();
+			}
+
+		}
+		nextPlant = "";
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+
 	}
 
 }
