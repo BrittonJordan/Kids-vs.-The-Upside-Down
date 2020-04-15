@@ -204,6 +204,12 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 		int row = (y / 45) * 45;
 		int col = (x / 45) * 45;
 		Point2D.Double position = new Point2D.Double(col, row);
+		for(Actor actor : actors) {
+			if(position.equals(actor.getPosition())) {
+				return;
+			}
+		}
+	
 		if (nextPlant.equals("eleven")) {
 			Plant elevenPlant = new Eleven(position);
 			actors.add(elevenPlant);
