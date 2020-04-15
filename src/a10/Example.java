@@ -32,7 +32,7 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 	int numCols;
 	int cellSize;
 	Random rand;
-	int platinumPoints;
+	private static int platinumPoints;
 	JLabel pointsLabel;
 	int counter;
 	int counter2;
@@ -98,7 +98,7 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 
 	}
 	
-	public void changePlatinumPoints(int change) {
+	public static void changePlatinumPoints(int change) {
 		platinumPoints += change;
 	}
 

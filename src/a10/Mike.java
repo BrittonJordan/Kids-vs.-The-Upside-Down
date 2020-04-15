@@ -5,6 +5,7 @@ import java.awt.geom.Point2D.Double;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -28,6 +29,7 @@ public class Mike extends Plant{
 	
 	public Mike(Double startingPosition) {
 		super(startingPosition, new Point2D.Double(IMAGE.getWidth(), IMAGE.getHeight()), IMAGE, HEALTH, COOLDOWN, ATTACKDMG);
+		
 	}
 	
 	@Override
@@ -39,5 +41,11 @@ public class Mike extends Plant{
 			}
 			
 		}
+	}
+	
+	@Override
+	public void removeAction(ArrayList<Actor> others) {
+		Example.changePlatinumPoints(100);
+
 	}
 }
