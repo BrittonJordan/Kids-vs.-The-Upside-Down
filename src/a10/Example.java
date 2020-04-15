@@ -85,19 +85,18 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 
 		dustin = new JButton("Dustin: 5");
 		dustin.addActionListener(this);
-		
+
 		try {
 			background = ImageIO.read(new File("src/a10/Icons/background.png"));
 		} catch (IOException e) {
 			System.out.println("Background image not found");
 			e.printStackTrace();
 		}
-		
 
 		addMouseListener(this);
 
 	}
-	
+
 	public static void changePlatinumPoints(int change) {
 		platinumPoints += change;
 	}
@@ -215,7 +214,7 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 		if (e.getSource() == dustin && platinumPoints >= 5) {
 			nextPlant = "dustin";
 		}
-		
+
 		for (Actor zombie : actors) {
 			if (zombie.getPosition().getX() < 0) {
 				System.out.println("You survived the Upside Down for " + counter / 33 + " seconds!");
@@ -234,43 +233,44 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 		int row = (y / 50) * 50;
 		int col = (x / 50) * 50;
 		Point2D.Double position = new Point2D.Double(col, row);
-		for(Actor actor : actors) {
-			if(position.equals(actor.getPosition())) {
+		for (Actor actor : actors) {
+			if (position.equals(actor.getPosition())) {
 				return;
 			}
 		}
-	
-		if (nextPlant.equals("eleven")) {
-			Plant elevenPlant = new Eleven(position);
-			actors.add(elevenPlant);
-			platinumPoints -= 50;
-			pointsLabel.setText("Platinum : " + platinumPoints);
+		if ((col <= 300) && (row > 0 && row <= 250)) { //Restrict the playing field 
+			if (nextPlant.equals("eleven")) {
+				Plant elevenPlant = new Eleven(position);
+				actors.add(elevenPlant);
+				platinumPoints -= 50;
+				pointsLabel.setText("Platinum : " + platinumPoints);
+			}
+			if (nextPlant.equals("mike")) {
+				Plant mikePlant = new Mike(position);
+				actors.add(mikePlant);
+				platinumPoints -= 25;
+				pointsLabel.setText("Platinum : " + platinumPoints);
+			}
+			if (nextPlant.equals("will")) {
+				Plant willPlant = new Will(position);
+				actors.add(willPlant);
+				platinumPoints -= 15;
+				pointsLabel.setText("Platinum : " + platinumPoints);
+			}
+			if (nextPlant.equals("lucas")) {
+				Plant lucasPlant = new Lucas(position);
+				actors.add(lucasPlant);
+				platinumPoints -= 10;
+				pointsLabel.setText("Platinum : " + platinumPoints);
+			}
+			if (nextPlant.equals("dustin")) {
+				Plant dustinPlant = new Dustin(position);
+				actors.add(dustinPlant);
+				platinumPoints -= 5;
+				pointsLabel.setText("Platinum : " + platinumPoints);
+			}
+			nextPlant = "";
 		}
-		if (nextPlant.equals("mike")) {
-			Plant mikePlant = new Mike(position);
-			actors.add(mikePlant);
-			platinumPoints -= 25;
-			pointsLabel.setText("Platinum : " + platinumPoints);
-		}
-		if (nextPlant.equals("will")) {
-			Plant willPlant = new Will(position);
-			actors.add(willPlant);
-			platinumPoints -= 15;
-			pointsLabel.setText("Platinum : " + platinumPoints);
-		}
-		if (nextPlant.equals("lucas")) {
-			Plant lucasPlant = new Lucas(position);
-			actors.add(lucasPlant);
-			platinumPoints -= 10;
-			pointsLabel.setText("Platinum : " + platinumPoints);
-		}
-		if (nextPlant.equals("dustin")) {
-			Plant dustinPlant = new Dustin(position);
-			actors.add(dustinPlant);
-			platinumPoints -= 5;
-			pointsLabel.setText("Platinum : " + platinumPoints);
-		}
-		nextPlant = "";
 	}
 
 	@Override
