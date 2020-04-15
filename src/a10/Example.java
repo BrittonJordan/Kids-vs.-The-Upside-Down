@@ -107,7 +107,7 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(background, 600, 300, this);
+		g.drawImage(background, 0, 0, 600, 300, this);
 		for (Actor actor : actors) {
 			actor.draw(g, 0);
 			actor.drawHealthBar(g);
@@ -160,7 +160,7 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 
 		// Create demogorgons at random rows
 
-		if (rand.nextInt(1000) > 997) {
+		if (rand.nextInt(1000) > 999) {
 			int row = rand.nextInt(5) + 1;
 			int y = row * 50;
 
