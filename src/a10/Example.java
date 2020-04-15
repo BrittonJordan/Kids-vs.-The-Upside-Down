@@ -28,24 +28,24 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 	private static final long serialVersionUID = 1L;
 	private Timer timer;
 	private ArrayList<Actor> actors; // Plants and zombies all go in here
-	int numRows;
-	int numCols;
-	int cellSize;
-	Random rand;
+	private int numRows;
+	private int numCols;
+	private int cellSize;
+	private Random rand;
 	private static int platinumPoints;
-	JLabel pointsLabel;
-	int counter;
-	int counter2;
-	static JButton eleven;
-	static JButton mike;
-	static JButton will;
-	static JButton lucas;
-	static JButton dustin;
+	private JLabel pointsLabel;
+	private int counter;
+	private int counter2;
+	private static JButton eleven;
+	private static JButton mike;
+	private static JButton will;
+	private static JButton lucas;
+	private static JButton dustin;
 	private String nextPlant;
 	private BufferedImage background;
 
 	/**
-	 * Setup the basic info for the example
+	 * Setup the basic info for the application
 	 */
 	public Example() {
 		super();
@@ -62,15 +62,16 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 		rand = new Random();
 
 		// The timer updates the game each time it goes.
-		// Get the javax.swing Timer, not from util.
 		timer = new Timer(30, this);
 		timer.start();
-
+		
+		// Make a label for the game's resource, platinum
 		pointsLabel = new JLabel("Platinum : 0");
 		this.add(pointsLabel);
 		platinumPoints = 0;
 		counter = 0;
-
+		
+		// Make a button for each plant
 		eleven = new JButton("Eleven: 50");
 		eleven.addActionListener(this);
 
@@ -86,6 +87,7 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 		dustin = new JButton("Dustin: 5");
 		dustin.addActionListener(this);
 
+		// Load the background image from file
 		try {
 			background = ImageIO.read(new File("src/a10/Icons/background.png"));
 		} catch (IOException e) {
@@ -97,6 +99,10 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 
 	}
 
+	/**
+	 * allows outside access to the platinum points resource
+	 * @param change The amount by which platinumPoints will change
+	 */
 	public static void changePlatinumPoints(int change) {
 		platinumPoints += change;
 	}
@@ -116,14 +122,13 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 
 	/**
 	 * 
-	 * This is triggered by the timer. It is the game loop of this test.
+	 * This is triggered by the timer. It is the game loop of this application
 	 * 
 	 * @param e
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		// This method is getting a little long, but it is mostly loop code
 		// Increment their cooldowns and reset collision status
 		for (Actor actor : actors) {
 			actor.update();
@@ -142,7 +147,7 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 			if (actor.isAlive())
 				nextTurnActors.add(actor);
 			else
-				actor.removeAction(actors); // any special effect or whatever on removal
+				actor.removeAction(actors); // any special effect on removal
 		}
 		actors = nextTurnActors;
 
