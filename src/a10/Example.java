@@ -97,6 +97,10 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 		addMouseListener(this);
 
 	}
+	
+	public void changePlatinumPoints(int change) {
+		platinumPoints += change;
+	}
 
 	/***
 	 * Implement the paint method to draw the plants
