@@ -42,6 +42,7 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 	static JButton lucas;
 	static JButton dustin;
 	private String nextPlant;
+	private BufferedImage background;
 
 	/**
 	 * Setup the basic info for the example
@@ -84,6 +85,14 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 
 		dustin = new JButton("Dustin: 5");
 		dustin.addActionListener(this);
+		
+		try {
+			background = ImageIO.read(new File("src/a10/Icons/background.png"));
+		} catch (IOException e) {
+			System.out.println("Background image not found");
+			e.printStackTrace();
+		}
+		
 
 		addMouseListener(this);
 
@@ -95,6 +104,7 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		g.drawImage(background, 600, 300, this);
 		for (Actor actor : actors) {
 			actor.draw(g, 0);
 			actor.drawHealthBar(g);
