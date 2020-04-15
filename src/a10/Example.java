@@ -35,6 +35,7 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 	int platinumPoints;
 	JLabel pointsLabel;
 	int counter;
+	int counter2;
 	static JButton eleven;
 	static JButton mike;
 	static JButton will;
@@ -56,7 +57,7 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 
 		// Store all the plants and zombies in here.
 		actors = new ArrayList<>();
-		
+
 		rand = new Random();
 
 		// The timer updates the game each time it goes.
@@ -144,7 +145,7 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 			actor.move(); // for Zombie, only moves if not colliding.
 		}
 
-		// Create zombies at random rows
+		// Create demegorgons at random rows
 
 		if (rand.nextInt(100) > 98) {
 			int row = rand.nextInt(5) + 1;
@@ -153,56 +154,46 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 			Zombie zombie = new Demogorgon(new Point2D.Double(500, y));
 			actors.add(zombie);
 		}
-//		
+
+		// Create eggos at random rows
 		counter++;
-		if (counter > 20) {
-			platinumPoints += 10;
-			pointsLabel.setText("Platinum : " + platinumPoints);
-			counter = 0;
+		if (counter > 1000) { // wait for about 30 seconds to start creating eggos
+			if (rand.nextInt(1000) > 995) {
+				int row = rand.nextInt(5) + 1;
+				int y = row * 45;
+
+				Zombie zombie = new Eggo(new Point2D.Double(500, y));
+				actors.add(zombie);
+			}
 		}
 
-		if (e.getSource() == eleven && platinumPoints >= 50) { // one for each kid
+		// Increment resource
+		counter2++;
+		if (counter2 > 20) {
+			platinumPoints += 10;
+			pointsLabel.setText("Platinum : " + platinumPoints);
+			counter2 = 0;
+		}
+
+		// Check for button clicks
+
+		if (e.getSource() == eleven && platinumPoints >= 50) {
 			nextPlant = "eleven";
 		}
-		if (e.getSource() == mike && platinumPoints >= 25) { // one for each kid
+		if (e.getSource() == mike && platinumPoints >= 25) {
 			nextPlant = "mike";
 		}
-		if (e.getSource() == will && platinumPoints >= 15) { // one for each kid
+		if (e.getSource() == will && platinumPoints >= 15) {
 			nextPlant = "will";
 		}
-		if (e.getSource() == lucas && platinumPoints >= 10) { // one for each kid
+		if (e.getSource() == lucas && platinumPoints >= 10) {
 			nextPlant = "lucas";
 		}
-		if (e.getSource() == dustin && platinumPoints >= 5) { // one for each kid
+		if (e.getSource() == dustin && platinumPoints >= 5) {
 			nextPlant = "dustin";
 		}
 		// Redraw the new scene
 		repaint();
-	}
-
-	/**
-	 * Make the game and run it
-	 * 
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// Schedule a job for the event-dispatching thread:
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				JFrame app = new JFrame("Plant and Zombie Test");
-				app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				Example panel = new Example();
-
-				app.setContentPane(panel);
-				app.add(eleven);
-				app.add(mike);
-				app.add(will);
-				app.add(lucas);
-				app.add(dustin);
-				app.pack();
-				app.setVisible(true);
-			}
-		});
 	}
 
 	@Override
@@ -268,6 +259,31 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 
+	}
+
+	/**
+	 * Make the game and run it
+	 * 
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// Schedule a job for the event-dispatching thread:
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				JFrame app = new JFrame("Plant and Zombie Test");
+				app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				Example panel = new Example();
+
+				app.setContentPane(panel);
+				app.add(eleven);
+				app.add(mike);
+				app.add(will);
+				app.add(lucas);
+				app.add(dustin);
+				app.pack();
+				app.setVisible(true);
+			}
+		});
 	}
 
 }
