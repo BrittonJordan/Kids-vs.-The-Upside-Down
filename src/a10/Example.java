@@ -145,14 +145,23 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 			actor.move(); // for Zombie, only moves if not colliding.
 		}
 
-		// Create demegorgons at random rows
+		// Create demogorgons at random rows
 
-		if (rand.nextInt(100) > 98) {
+		if (rand.nextInt(1000) > 997) {
 			int row = rand.nextInt(5) + 1;
-			int y = row * 45;
+			int y = row * 50;
 
 			Zombie zombie = new Demogorgon(new Point2D.Double(500, y));
 			actors.add(zombie);
+		}
+		if (counter > 3000) { // more demogorgons generated after about 90 seconds
+			if (rand.nextInt(1000) > 995) {
+				int row = rand.nextInt(5) + 1;
+				int y = row * 50;
+
+				Zombie zombie = new Demogorgon(new Point2D.Double(500, y));
+				actors.add(zombie);
+			}
 		}
 
 		// Create eggos at random rows
@@ -160,7 +169,7 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 		if (counter > 1000) { // wait for about 30 seconds to start creating eggos
 			if (rand.nextInt(1000) > 995) {
 				int row = rand.nextInt(5) + 1;
-				int y = row * 45;
+				int y = row * 50;
 
 				Zombie zombie = new Eggo(new Point2D.Double(500, y));
 				actors.add(zombie);
@@ -170,7 +179,7 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 		// Increment resource
 		counter2++;
 		if (counter2 > 20) {
-			platinumPoints += 10;
+			platinumPoints += 2;
 			pointsLabel.setText("Platinum : " + platinumPoints);
 			counter2 = 0;
 		}
@@ -192,6 +201,13 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 		if (e.getSource() == dustin && platinumPoints >= 5) {
 			nextPlant = "dustin";
 		}
+		
+		for (Actor zombie : actors) {
+			if (zombie.getPosition().getX() < 0) {
+				System.out.println("You survived the Upside Down for " + counter / 33 + " seconds!");
+				System.exit(0);
+			}
+		}
 		// Redraw the new scene
 		repaint();
 	}
@@ -201,8 +217,8 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 
 		int x = e.getX();
 		int y = e.getY();
-		int row = (y / 45) * 45;
-		int col = (x / 45) * 45;
+		int row = (y / 50) * 50;
+		int col = (x / 50) * 50;
 		Point2D.Double position = new Point2D.Double(col, row);
 		for(Actor actor : actors) {
 			if(position.equals(actor.getPosition())) {

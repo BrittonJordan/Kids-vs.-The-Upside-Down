@@ -12,7 +12,7 @@ public class Eggo extends Zombie {
 
 	private static final int HEALTH = 50;
 	private static final int COOLDOWN = 999;
-	private static final int SPEED = -1;
+	private static final int SPEED = -2;
 	private static final int ATTACKDMG = 35;
 	private static final BufferedImage IMAGE;
 	static {
