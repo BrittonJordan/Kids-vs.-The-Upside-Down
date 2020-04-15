@@ -53,7 +53,7 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 		numRows = 6;
 		numCols = 7;
 		cellSize = 45;
-		setPreferredSize(new Dimension(200 + numCols * cellSize, 50 + numRows * cellSize));
+		setPreferredSize(new Dimension(250 + numCols * cellSize, 50 + numRows * cellSize));
 
 		// Store all the plants and zombies in here.
 		actors = new ArrayList<>();
