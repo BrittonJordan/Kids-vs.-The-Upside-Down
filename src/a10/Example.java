@@ -64,13 +64,13 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 		// The timer updates the game each time it goes.
 		timer = new Timer(30, this);
 		timer.start();
-		
+
 		// Make a label for the game's resource, platinum
 		pointsLabel = new JLabel("Platinum : 0");
 		this.add(pointsLabel);
 		platinumPoints = 0;
 		counter = 0;
-		
+
 		// Make a button for each plant
 		eleven = new JButton("Eleven: 50");
 		eleven.addActionListener(this);
@@ -101,6 +101,7 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 
 	/**
 	 * allows outside access to the platinum points resource
+	 * 
 	 * @param change The amount by which platinumPoints will change
 	 */
 	public static void changePlatinumPoints(int change) {
@@ -164,8 +165,7 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 		}
 
 		// Create demogorgons at random rows
-
-		if (rand.nextInt(1000) > 999) {
+		if (rand.nextInt(1000) > 995) {
 			int row = rand.nextInt(5) + 1;
 			int y = row * 50;
 
@@ -173,7 +173,7 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 			actors.add(zombie);
 		}
 		if (counter > 3000) { // more demogorgons generated after about 90 seconds
-			if (rand.nextInt(1000) > 995) {
+			if (rand.nextInt(1000) > 997) {
 				int row = rand.nextInt(5) + 1;
 				int y = row * 50;
 
@@ -203,21 +203,35 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 		}
 
 		// Check for button clicks
-
 		if (e.getSource() == eleven && platinumPoints >= 50) {
 			nextPlant = "eleven";
+		}
+		else if(e.getSource() == eleven) { //Alerts player of insufficient funds
+			System.out.println("CODE RED: Not enough platinum!");
 		}
 		if (e.getSource() == mike && platinumPoints >= 25) {
 			nextPlant = "mike";
 		}
+		else if(e.getSource() == mike) {
+			System.out.println("CODE RED: Not enough platinum!");
+		}
 		if (e.getSource() == will && platinumPoints >= 15) {
 			nextPlant = "will";
+		}
+		else if(e.getSource() == will) {
+			System.out.println("CODE RED: Not enough platinum!");
 		}
 		if (e.getSource() == lucas && platinumPoints >= 10) {
 			nextPlant = "lucas";
 		}
+		else if(e.getSource() == lucas) {
+			System.out.println("CODE RED: Not enough platinum!");
+		}
 		if (e.getSource() == dustin && platinumPoints >= 5) {
 			nextPlant = "dustin";
+		}
+		else if(e.getSource() == dustin) {
+			System.out.println("CODE RED: Not enough platinum!");
 		}
 
 		for (Actor zombie : actors) {
@@ -243,7 +257,10 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 				return;
 			}
 		}
-		if ((col <= 300) && (row > 0 && row <= 250)) { //Restrict the playing field 
+		if (nextPlant==null) {
+			return;
+		}
+		if ((col <= 300) && (row > 0 && row <= 250)) { // Restrict the playing field
 			if (nextPlant.equals("eleven")) {
 				Plant elevenPlant = new Eleven(position);
 				actors.add(elevenPlant);
@@ -274,7 +291,7 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 				platinumPoints -= 5;
 				pointsLabel.setText("Platinum : " + platinumPoints);
 			}
-			nextPlant = "";
+			nextPlant = null;
 		}
 	}
 
