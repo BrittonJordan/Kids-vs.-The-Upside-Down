@@ -35,7 +35,6 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 	private static int platinumPoints;
 	private JLabel pointsLabel;
 	private int counter;
-	private int counter2;
 	private static JButton eleven;
 	private static JButton mike;
 	private static JButton will;
@@ -195,45 +194,39 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 		}
 
 		// Increment resource
-		counter2++;
-		if (counter2 > 20) {
+		if (counter % 20 == 0) {
 			platinumPoints += 2;
 			pointsLabel.setText("Platinum : " + platinumPoints);
-			counter2 = 0;
 		}
 
-		// Check for button clicks
+		// Check for button clicks & store plant to place on playing field
 		if (e.getSource() == eleven && platinumPoints >= 50) {
 			nextPlant = "eleven";
-		}
-		else if(e.getSource() == eleven) { //Alerts player of insufficient funds
+		} else if (e.getSource() == eleven) { // Alerts player of insufficient funds
 			System.out.println("CODE RED: Not enough platinum!");
 		}
 		if (e.getSource() == mike && platinumPoints >= 25) {
 			nextPlant = "mike";
-		}
-		else if(e.getSource() == mike) {
+		} else if (e.getSource() == mike) {
 			System.out.println("CODE RED: Not enough platinum!");
 		}
 		if (e.getSource() == will && platinumPoints >= 15) {
 			nextPlant = "will";
-		}
-		else if(e.getSource() == will) {
+		} else if (e.getSource() == will) {
 			System.out.println("CODE RED: Not enough platinum!");
 		}
 		if (e.getSource() == lucas && platinumPoints >= 10) {
 			nextPlant = "lucas";
-		}
-		else if(e.getSource() == lucas) {
+		} else if (e.getSource() == lucas) {
 			System.out.println("CODE RED: Not enough platinum!");
 		}
 		if (e.getSource() == dustin && platinumPoints >= 5) {
 			nextPlant = "dustin";
-		}
-		else if(e.getSource() == dustin) {
+		} else if (e.getSource() == dustin) {
 			System.out.println("CODE RED: Not enough platinum!");
 		}
 
+		//Alerts player of score achieved at the end of the game
 		for (Actor zombie : actors) {
 			if (zombie.getPosition().getX() < 0) {
 				System.out.println("You survived the Upside Down for " + counter / 33 + " seconds!");
@@ -246,21 +239,27 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-
+		//Gets the x and y coordinate of the mouse click
 		int x = e.getX();
 		int y = e.getY();
+		//Changes coordinate to a specific integer % 50
 		int row = (y / 50) * 50;
 		int col = (x / 50) * 50;
+		//Finds the specific grid location for plant placement
 		Point2D.Double position = new Point2D.Double(col, row);
+		//Checks that no plant is already located in the cell
 		for (Actor actor : actors) {
 			if (position.equals(actor.getPosition())) {
 				return;
 			}
 		}
-		if (nextPlant==null) {
+		//If nothing is stored in nextPlant, no plant will try to be placed
+		if (nextPlant == null) {
 			return;
 		}
+
 		if ((col <= 300) && (row > 0 && row <= 250)) { // Restrict the playing field
+			//Checks which plant is stored and places in set grid position
 			if (nextPlant.equals("eleven")) {
 				Plant elevenPlant = new Eleven(position);
 				actors.add(elevenPlant);
@@ -291,6 +290,7 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 				platinumPoints -= 5;
 				pointsLabel.setText("Platinum : " + platinumPoints);
 			}
+			//Removes stored plant after placement
 			nextPlant = null;
 		}
 	}
@@ -331,7 +331,6 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 				JFrame app = new JFrame("Plant and Zombie Test");
 				app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				Example panel = new Example();
-
 				app.setContentPane(panel);
 				app.add(eleven);
 				app.add(mike);
