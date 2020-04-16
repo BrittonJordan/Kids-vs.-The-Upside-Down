@@ -45,7 +45,7 @@ public class Mike extends Plant{
 	
 	@Override
 	public void removeAction(ArrayList<Actor> others) {
-		Example.changePlatinumPoints(100);
+		Example.changePlatinumPoints(10);
 
 	}
 }
