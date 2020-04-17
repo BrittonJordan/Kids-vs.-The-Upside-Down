@@ -23,24 +23,42 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+/**
+ * Kids Vs. The Upside Down
+ * 
+ * A Plants Vs. Zombies type game based off the popular Netflix Series, Stranger
+ * Things.
+ * 
+ * CS1410, Assignment 10, Spring 2020
+ * 
+ * @author David Johnson (Starter Code)
+ * @author Taylor Dunn
+ * @author Britton Jordan
+ * 
+ *         Stranger Things is property of Netflix. Background Image Source:
+ *         https://vignette.wikia.nocookie.net/strangerthings8338/images/f/f1
+ *         /The_Flea_and_the_Acrobat_-_the_Monster_feeds.png/revision/latest?cb=20170409124503
+ *         Pixel Art and Background Overlay Created By: Taylor Dunn
+ * 
+ */
 public class Example extends JPanel implements ActionListener, MouseListener {
 
 	private static final long serialVersionUID = 1L;
 	private Timer timer;
 	private ArrayList<Actor> actors; // Plants and zombies all go in here
-	private int numRows;
-	private int numCols;
 	private int cellSize;
-	private Random rand;
-	private static int platinumPoints;
-	private JLabel pointsLabel;
 	private int counter;
+	private int numCols;
+	private int numRows;
+	private static int platinumPoints; // Game currency
+	private JLabel pointsLabel;
+	private Random rand;
+	private static JButton dustin;
 	private static JButton eleven;
+	private static JButton lucas;
 	private static JButton mike;
 	private static JButton will;
-	private static JButton lucas;
-	private static JButton dustin;
-	private String nextPlant;
+	private String nextPlant; // Used to store next plant to be placed on playing field
 	private BufferedImage background;
 
 	/**
@@ -49,7 +67,7 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 	public Example() {
 		super();
 
-		// Define some quantities of the scene
+		// Sets Dimensions of the application
 		numRows = 6;
 		numCols = 7;
 		cellSize = 50;
@@ -58,19 +76,20 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 		// Store all the plants and zombies in here.
 		actors = new ArrayList<>();
 
+		// Used to randomize the placement of zombies
 		rand = new Random();
 
 		// The timer updates the game each time it goes.
 		timer = new Timer(30, this);
 		timer.start();
 
-		// Make a label for the game's resource, platinum
+		// Makes a label for the game's resource, platinum
 		pointsLabel = new JLabel("Platinum : 0");
 		this.add(pointsLabel);
 		platinumPoints = 0;
 		counter = 0;
 
-		// Make a button for each plant
+		// Makes a button for each plant
 		eleven = new JButton("Eleven: 50");
 		eleven.addActionListener(this);
 
@@ -93,13 +112,12 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 			System.out.println("Background image not found");
 			e.printStackTrace();
 		}
-
+		// Adds a Mouse Listener to the application
 		addMouseListener(this);
-
 	}
 
 	/**
-	 * allows outside access to the platinum points resource
+	 * Allows outside access to the platinum points resource
 	 * 
 	 * @param change The amount by which platinumPoints will change
 	 */
@@ -167,15 +185,15 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 		if (rand.nextInt(1000) > 995) {
 			int row = rand.nextInt(5) + 1;
 			int y = row * 50;
-
 			Zombie zombie = new Demogorgon(new Point2D.Double(500, y));
 			actors.add(zombie);
 		}
-		if (counter > 3000) { // more demogorgons generated after about 90 seconds
+
+		// More demogorgons generated after about 90 seconds
+		if (counter > 3000) {
 			if (rand.nextInt(1000) > 997) {
 				int row = rand.nextInt(5) + 1;
 				int y = row * 50;
-
 				Zombie zombie = new Demogorgon(new Point2D.Double(500, y));
 				actors.add(zombie);
 			}
@@ -187,7 +205,6 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 			if (rand.nextInt(1000) > 995) {
 				int row = rand.nextInt(5) + 1;
 				int y = row * 50;
-
 				Zombie zombie = new Eggo(new Point2D.Double(500, y));
 				actors.add(zombie);
 			}
@@ -202,8 +219,8 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 		// Check for button clicks & store plant to place on playing field
 		if (e.getSource() == eleven && platinumPoints >= 50) {
 			nextPlant = "eleven";
-		} else if (e.getSource() == eleven) { // Alerts player of insufficient funds
-			System.out.println("CODE RED: Not enough platinum!");
+		} else if (e.getSource() == eleven) {
+			System.out.println("CODE RED: Not enough platinum!");// Alerts player of insufficient funds
 		}
 		if (e.getSource() == mike && platinumPoints >= 25) {
 			nextPlant = "mike";
@@ -226,7 +243,7 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 			System.out.println("CODE RED: Not enough platinum!");
 		}
 
-		//Alerts player of score achieved at the end of the game
+		// Alerts player of score achieved at the end of the game
 		for (Actor zombie : actors) {
 			if (zombie.getPosition().getX() < 0) {
 				System.out.println("You survived the Upside Down for " + counter / 33 + " seconds!");
@@ -239,27 +256,27 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		//Gets the x and y coordinate of the mouse click
+		// Gets the x and y coordinate of the mouse click
 		int x = e.getX();
 		int y = e.getY();
-		//Changes coordinate to a specific integer % 50
+		// Changes coordinate to a specific integer % 50
 		int row = (y / 50) * 50;
 		int col = (x / 50) * 50;
-		//Finds the specific grid location for plant placement
+		// Finds the specific grid location for plant placement
 		Point2D.Double position = new Point2D.Double(col, row);
-		//Checks that no plant is already located in the cell
+		// Checks that no plant is already located in the cell
 		for (Actor actor : actors) {
 			if (position.equals(actor.getPosition())) {
 				return;
 			}
 		}
-		//If nothing is stored in nextPlant, no plant will try to be placed
+		// If nothing is stored in nextPlant, no plant will try to be placed
 		if (nextPlant == null) {
 			return;
 		}
 
 		if ((col <= 300) && (row > 0 && row <= 250)) { // Restrict the playing field
-			//Checks which plant is stored and places in set grid position
+			// Checks which plant is stored and places in set grid position
 			if (nextPlant.equals("eleven")) {
 				Plant elevenPlant = new Eleven(position);
 				actors.add(elevenPlant);
@@ -290,33 +307,25 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 				platinumPoints -= 5;
 				pointsLabel.setText("Platinum : " + platinumPoints);
 			}
-			//Removes stored plant after placement
+			// Removes stored plant after placement
 			nextPlant = null;
 		}
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 
 	/**
@@ -332,6 +341,7 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 				app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				Example panel = new Example();
 				app.setContentPane(panel);
+				// Add Buttons to Panel
 				app.add(eleven);
 				app.add(mike);
 				app.add(will);
@@ -342,5 +352,4 @@ public class Example extends JPanel implements ActionListener, MouseListener {
 			}
 		});
 	}
-
 }
