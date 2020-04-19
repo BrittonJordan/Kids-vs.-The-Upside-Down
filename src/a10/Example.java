@@ -31,7 +31,7 @@ import javax.swing.Timer;
  * 
  * CS1410, Assignment 10, Spring 2020
  * 
- * @author David Johnson (Starter Code)
+ * @author Dr. David Johnson (Starter Code)
  * @author Taylor Dunn
  * @author Britton Jordan
  * 

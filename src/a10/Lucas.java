@@ -12,10 +12,12 @@ import a10.Zombie;
 
 public class Lucas extends Plant {
 
+	// Constant Variables for Lucas Plant
 	private static final int HEALTH = 30;
 	private static final int COOLDOWN = 30;
 	private static final int ATTACKDMG = 5;
 	private static final BufferedImage IMAGE;
+	// Loads image for Lucas Plant
 	static {
 		BufferedImage localImage = null;
 		try {
@@ -28,11 +30,13 @@ public class Lucas extends Plant {
 		IMAGE = localImage;
 	}
 
+	// Lucas Constructor
 	public Lucas(Double startingPosition) {
 		super(startingPosition, new Point2D.Double(IMAGE.getWidth(), IMAGE.getHeight()), IMAGE, HEALTH, COOLDOWN,
 				ATTACKDMG);
 	}
 
+	// Lucas only attacks zombies upon collision
 	@Override
 	public void attack(Actor other) {
 		if (other instanceof Zombie && this != other && this.isCollidingOther(other) && this.readyForAction()) {
@@ -40,5 +44,4 @@ public class Lucas extends Plant {
 			this.resetCoolDown();
 		}
 	}
-
 }

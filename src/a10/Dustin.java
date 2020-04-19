@@ -10,10 +10,12 @@ import javax.imageio.ImageIO;
 
 public class Dustin extends Plant {
 
+	// Constant Variables for Dustin Plant
 	private static final int HEALTH = 30;
 	private static final int COOLDOWN = 60;
 	private static final int ATTACKDMG = 5;
 	private static final BufferedImage IMAGE;
+	// Loads image for Dustin Plant
 	static {
 		BufferedImage localImage = null;
 		try {
@@ -26,11 +28,13 @@ public class Dustin extends Plant {
 		IMAGE = localImage;
 	}
 
+	// Dustin Constructor
 	public Dustin(Double startingPosition) {
 		super(startingPosition, new Point2D.Double(IMAGE.getWidth(), IMAGE.getHeight()), IMAGE, HEALTH, COOLDOWN,
 				ATTACKDMG);
 	}
 
+	// Dustin only attacks zombies upon collision
 	@Override
 	public void attack(Actor other) {
 		if (other instanceof Zombie && this != other && this.isCollidingOther(other) && this.readyForAction()) {
@@ -38,5 +42,4 @@ public class Dustin extends Plant {
 			this.resetCoolDown();
 		}
 	}
-
 }

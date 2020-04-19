@@ -10,11 +10,13 @@ import javax.imageio.ImageIO;
 
 public class Eggo extends Zombie {
 
+	// Constant Variables for Eggo Zombie
 	private static final int HEALTH = 50;
 	private static final int COOLDOWN = 999;
 	private static final int SPEED = -2;
 	private static final int ATTACKDMG = 35;
 	private static final BufferedImage IMAGE;
+	// Loads image for Eggo Zombie
 	static {
 		BufferedImage localImage = null;
 		try {
@@ -26,19 +28,19 @@ public class Eggo extends Zombie {
 		}
 		IMAGE = localImage;
 	}
-	
 
+	// Eggo Constructor
 	public Eggo(Double startingPosition) {
-		super(startingPosition, new Point2D.Double(IMAGE.getWidth(), IMAGE.getHeight()), IMAGE, HEALTH, COOLDOWN, SPEED, ATTACKDMG);
-		
+		super(startingPosition, new Point2D.Double(IMAGE.getWidth(), IMAGE.getHeight()), IMAGE, HEALTH, COOLDOWN, SPEED,
+				ATTACKDMG);
 	}
-	
+
+	// Eggo attack completely wipes out all health of the plant it hits upon collision
 	@Override
 	public void attack(Actor other) {
 		if (other instanceof Plant && this != other && this.isCollidingOther(other)) {
-				other.changeHealth(-(other.getHealth()));
-				this.changeHealth(-(this.getHealth()));
+			other.changeHealth(-(other.getHealth()));
+			this.changeHealth(-(this.getHealth()));
 		}
 	}
-
 }

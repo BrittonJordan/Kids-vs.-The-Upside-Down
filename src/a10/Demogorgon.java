@@ -11,12 +11,14 @@ import javax.imageio.ImageIO;
 import a10.Zombie;
 
 public class Demogorgon extends Zombie {
-	
+
+	// Constant Variables for Demogorgon Zombie
 	private static final int HEALTH = 50;
 	private static final int COOLDOWN = 30;
 	private static final int SPEED = -1;
 	private static final int ATTACKDMG = 10;
 	private static final BufferedImage IMAGE;
+	// Loads image for Demogorgon Zombie
 	static {
 		BufferedImage localImage = null;
 		try {
@@ -28,22 +30,21 @@ public class Demogorgon extends Zombie {
 		}
 		IMAGE = localImage;
 	}
-	
 
+	// Demogorgon Constructor
 	public Demogorgon(Double startingPosition) {
-		super(startingPosition, new Point2D.Double(IMAGE.getWidth(), IMAGE.getHeight()), IMAGE, HEALTH, COOLDOWN, SPEED, ATTACKDMG);
-		
+		super(startingPosition, new Point2D.Double(IMAGE.getWidth(), IMAGE.getHeight()), IMAGE, HEALTH, COOLDOWN, SPEED,
+				ATTACKDMG);
 	}
-	
+
+	// Demogorgon only attacks plants upon collision
 	@Override
 	public void attack(Actor other) {
 		if (other instanceof Plant && this != other && this.isCollidingOther(other)) {
-			if(this.readyForAction()) {
+			if (this.readyForAction()) {
 				other.changeHealth(-ATTACKDMG);
 				this.resetCoolDown();
 			}
-			
 		}
 	}
-
 }

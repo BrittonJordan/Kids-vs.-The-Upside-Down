@@ -8,12 +8,14 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Will extends Plant{
+public class Will extends Plant {
 
+	// Constant Variables for Will Plant
 	private static final int HEALTH = 40;
 	private static final int COOLDOWN = 15;
 	private static final int ATTACKDMG = 5;
 	private static final BufferedImage IMAGE;
+	// Loads image for Will Plant
 	static {
 		BufferedImage localImage = null;
 		try {
@@ -25,19 +27,21 @@ public class Will extends Plant{
 		}
 		IMAGE = localImage;
 	}
-	
+
+	// Will Constructor
 	public Will(Double startingPosition) {
-		super(startingPosition, new Point2D.Double(IMAGE.getWidth(), IMAGE.getHeight()), IMAGE, HEALTH, COOLDOWN, ATTACKDMG);
+		super(startingPosition, new Point2D.Double(IMAGE.getWidth(), IMAGE.getHeight()), IMAGE, HEALTH, COOLDOWN,
+				ATTACKDMG);
 	}
-	
-		
+
+	// Will only attacks zombies upon collision
 	@Override
 	public void attack(Actor other) {
 		if (other instanceof Zombie && this != other && this.isCollidingOther(other)) {
-			if(this.readyForAction()) {
+			if (this.readyForAction()) {
 				other.changeHealth(-ATTACKDMG);
 				this.resetCoolDown();
-			}	
+			}
 		}
 	}
 }
