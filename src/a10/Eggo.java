@@ -35,12 +35,12 @@ public class Eggo extends Zombie {
 				ATTACKDMG);
 	}
 
-	// Eggo attack completely wipes out all health of the plant it hits upon collision
+	// Eggo only attacks plants upon collision
 	@Override
 	public void attack(Actor other) {
 		if (other instanceof Plant && this != other && this.isCollidingOther(other)) {
-			other.changeHealth(-(other.getHealth()));
-			this.changeHealth(-(this.getHealth()));
+			other.changeHealth(-(other.getHealth())); // Completely wipes out all health of the plant it hits upon collision
+			this.changeHealth(-(this.getHealth()));  // Wipes out all health of eggo itself
 		}
 	}
 }
